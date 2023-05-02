@@ -8,8 +8,10 @@ import {
   Body,
   Put,
   Delete,
+  Options,
 } from '@nestjs/common';
 import { Request } from 'express';
+import { UnauthorizedException } from '@nestjs/common';
 
 import { CreateCatDto, UpdateCatDto } from './dto/create-cat.dto';
 import { CatsService } from './cats.service';
@@ -53,5 +55,11 @@ export class CatsController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return `This action removes a #${id} cat`;
+  }
+
+  @Options()
+  throwError() {
+    // throw new Error('A random error'); // Nestjs default Error catch() runs and returns general 500 Internal Server Error.
+    throw new UnauthorizedException('Ooops, your are not authorized...');
   }
 }

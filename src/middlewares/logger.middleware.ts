@@ -11,6 +11,8 @@ export class LoggerMiddleware implements NestMiddleware {
 
 // Also we can implement classic middleware function instead of class version above.
 export function logger(req: Request, res: Response, next: NextFunction) {
-  //   console.log('request:', req);
+  // console.log('request:', req);
+  // console.log('response:', res);
+  console.log('general app logger...');
   next();
 }
