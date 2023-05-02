@@ -1,6 +1,6 @@
 export class CreateCatDto {
   name: string;
-  age?: number;
+  age: number;
   breed: string;
 }
 

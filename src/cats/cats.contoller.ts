@@ -11,27 +11,30 @@ import {
 } from '@nestjs/common';
 import { Request } from 'express';
 
-import { CreateCatDto, UpdateCatDto } from './create-cat.dto';
+import { CreateCatDto, UpdateCatDto } from './dto/create-cat.dto';
+import { CatsService } from './cats.service';
+import { Cat } from './interfaces/cat.interface';
 
 @Controller('cats')
 export class CatsController {
-  @Post()
-  @Header('Cache-Control', 'none')
-  create(@Body() body: CreateCatDto): Promise<CreateCatDto> {
-    console.log('Request body:', body);
+  constructor(private catService: CatsService) {}
 
-    return Promise.resolve(body);
+  // @Post()
+  // @Header('Cache-Control', 'none')
+  // create(@Body() body: CreateCatDto): Promise<CreateCatDto> {
+  //   console.log('Request body:', body);
+  //   return Promise.resolve(body);
+  // }
+
+  @Post()
+  async create(@Body() body: CreateCatDto) {
+    this.catService.create(body);
   }
 
   @Get()
-  findAll(@Req() request: Request): { name: string; age?: number }[] {
-    console.log('Request body:', request);
-
-    return [
-      { name: 'cat-1' },
-      { name: 'cat-2', age: 12 },
-      { name: 'cat-2', age: 23 },
-    ];
+  findAll(@Req() request: Request): Cat[] {
+    // console.log('Request body:', request);
+    return this.catService.findAll();
   }
 
   @Get(':id')
