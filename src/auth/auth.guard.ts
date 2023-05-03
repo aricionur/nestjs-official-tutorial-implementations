@@ -9,7 +9,7 @@ export class AuthGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
 
     // return validateRequest(request); you can implement the token validation in  your custom validation func.
-    // return true;
-    return false;
+    return true;
+    // return false;
   }
 }

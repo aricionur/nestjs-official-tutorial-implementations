@@ -10,12 +10,13 @@ import {
   Delete,
   Options,
 } from '@nestjs/common';
-import { UnauthorizedException } from '@nestjs/common';
+import { UnauthorizedException, UseInterceptors } from '@nestjs/common';
 import { Request } from 'express';
 
 import { CreateCatDto, UpdateCatDto } from './dto/create-cat.dto';
 import { CatsService } from './cats.service';
 import { Cat } from './interfaces/cat.interface';
+import { CacheInterceptor } from 'src/interceptors/cache.interceptor';
 
 @Controller('cats')
 export class CatsController {
@@ -33,6 +34,7 @@ export class CatsController {
     this.catService.create(body);
   }
 
+  @UseInterceptors(CacheInterceptor)
   @Get()
   findAll(@Req() request: Request): Cat[] {
     // console.log('Request body:', request);
