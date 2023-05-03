@@ -10,8 +10,8 @@ import {
   Delete,
   Options,
 } from '@nestjs/common';
-import { Request } from 'express';
 import { UnauthorizedException } from '@nestjs/common';
+import { Request } from 'express';
 
 import { CreateCatDto, UpdateCatDto } from './dto/create-cat.dto';
 import { CatsService } from './cats.service';
