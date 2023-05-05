@@ -15,7 +15,8 @@ import { Request } from 'express';
 
 import { CreateCatDto, UpdateCatDto } from './dto/create-cat.dto';
 import { CatsService } from './cats.service';
-import { Cat } from './interfaces/cat.interface';
+// import { Cat } from './interfaces/cat.interface';
+import { Cat } from 'src/graphql.schema';
 import { CacheInterceptor } from 'src/interceptors/cache.interceptor';
 import { User } from 'src/user/user.decorators';
 import { User as UserEntity } from 'src/user/interfaces/user';
