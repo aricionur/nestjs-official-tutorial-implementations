@@ -17,6 +17,8 @@ import { CreateCatDto, UpdateCatDto } from './dto/create-cat.dto';
 import { CatsService } from './cats.service';
 import { Cat } from './interfaces/cat.interface';
 import { CacheInterceptor } from 'src/interceptors/cache.interceptor';
+import { User } from 'src/user/user.decorators';
+import { User as UserEntity } from 'src/user/interfaces/user';
 
 @Controller('cats')
 export class CatsController {
@@ -36,8 +38,15 @@ export class CatsController {
 
   @UseInterceptors(CacheInterceptor)
   @Get()
-  findAll(@Req() request: Request): Cat[] {
+  findAll(
+    @Req() request: Request,
+    @User() user: UserEntity,
+    @User('username') username: string,
+  ): Cat[] {
     // console.log('Request body:', request);
+    // console.log('user:', user);
+    // console.log('username:', username);
+
     return this.catService.findAll();
   }
 
